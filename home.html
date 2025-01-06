@@ -3,57 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Hover Effect</title>
-    <link rel="stylesheet" href="style/style1.css">
+    <title>Dot Patterns</title>
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9; /* Light background */
+        }
+
+        .dot-patterns {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%; /* Ensures enough space for both containers */
+            gap: 50px;
+        }
+
+        /* Circular Dots */
+        .circular-dots {
+            display: flex;
+            gap: 15px;
+        }
+
+        .circular-dots .dot {
+            width: 15px;
+            height: 15px;
+            border: 2px solid #6a5acd;
+            border-radius: 50%;
+        }
+
+        /* Grid Dots */
+        .grid-dots {
+            display: grid;
+            grid-template-columns: repeat(10, 15px); /* 10 columns */
+            grid-template-rows: repeat(10, 15px);   /* 10 rows */
+            gap: 8px; /* Space between dots */
+            width: 250px; /* Fixed container width */
+            height: 250px; /* Fixed container height */
+            background-color: #ffffff; /* Optional: for visibility */
+        }
+
+        .grid-dots .grid-dot {
+            width: 10px; /* Visible size */
+            height: 10px;
+            background-color: #6a5acd; /* Purple dots */
+            border-radius: 50%; /* Circular dots */
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <a href="https://retail.minet.co.ke/biznasure/" class="box">
-          <div class="imgBx">
-            <img src="imgs/cvc.png">
-          </div>
-          <div class="content">
-            <div>
-              <h2>BiznaSure</h2>
-            </div>
-          </div>
-        </a>
-      
-        <a href="https://retail.minet.co.ke/" class="box">
-          <div class="imgBx">
-            <img src="imgs/Biznasure-01.jpg">
-          </div>
-          <div class="content">
-            <div>
-              <h2>Elearning</h2>
-            </div>
-          </div>
-        </a>
-      
-        <a href="your-link-here" class="box">
-          <div class="imgBx">
-            <img src="imgs/cvc.png">
-          </div>
-          <div class="content">
-            <div>
-              <h2>Clairvoyant Risk Management</h2>
-            </div>
-          </div>
-        </a>
-      
-        <a href="your-link-here" class="box">
-          <div class="imgBx">
-            <img src="imgs/Clairvoyant.jpeg">
-          </div>
-          <div class="content">
-            <div>
-              <h2>Clairvoyant Risk Management</h2>
-            </div>
-          </div>
-        </a>
-      </div>
-      
+    <div class="dot-patterns">
+        <!-- Circular Dots -->
+        <div class="circular-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <!-- Grid Dots -->
+        <div class="grid-dots">
+            <!-- Grid dots are dynamically created -->
+            <script>
+                const gridDots = document.querySelector('.grid-dots');
+                for (let i = 0; i < 100; i++) { // 10x10 grid
+                    const dot = document.createElement('div');
+                    dot.classList.add('grid-dot');
+                    gridDots.appendChild(dot);
+                }
+            </script>
+        </div>
+    </div>
 </body>
 </html>
-
-            

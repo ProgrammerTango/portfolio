@@ -7,8 +7,13 @@
   --bg-black-100: #fdf9ff;
   --bg-black-50: #e8dfec;
   --text-black-900: #302e4d; /* Dark text color */
-  --text-black-800: #1f1f30; /* Very dark text for normal mode */
-  --text-black-700: #504e70;
+  --text-black-800:  #282c34; /* Very dark text for normal mode */
+  --text-black-700: #504e70; 
+  --text-black-600: #ffd700;
+  --text-black-100: #c586c0;
+
+
+  
 }
 
 body.dark {
@@ -146,7 +151,7 @@ body.dark {
 
 .top-line, .bottom-line {
   width: 2px;
-  background-color: var(--skin-color);
+  background-color: #ffd700;
 }
 
 .top-line {
@@ -212,9 +217,12 @@ body.dark {
     padding-bottom: 10px;
   }
   
-
+  .portfolio h2{
+    color: var(--skin-color);
+  }
   .section-title h2{
     position: relative;
+    color: var(--skin-color);
   }
   .section-title h2::before{
     content:'';
@@ -254,7 +262,7 @@ body.dark {
   /*aside */
   .aside{
     width: 240px;
-    background: var(--bg-black-100);
+    background: var(--text-black-800);
     position: fixed;
     left: 0;
     top: 0;
@@ -273,7 +281,7 @@ body.dark {
     text-transform: capitalize;
   }
   .aside .logo a{
-    color: var(--text-black-900);
+    color: var(--text-black-600);
     font-weight: 700  ;
     padding: 15px 20px;
     font-size: 30px;
@@ -355,7 +363,7 @@ body.dark {
     font-weight: 600;
     display: block;
     border-bottom: 1px solid var(--bg-black-50);
-    color: var(--text-black-900);
+    color: var(--text-black-100);
     padding: 5px 15px;
   }
   .aside .nav li a.active{
@@ -997,6 +1005,44 @@ display: none;
       margin-top: 10px;
       font-size: 14px;
   }
+/* General Container Styles */
+
+
+.circular-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.circular-dots .dot {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #6a5acd; /* Purple outline */
+  border-radius: 50%; /* Makes it circular */
+}
+
+/* Grid Dots on Right */
+.grid-dots-container {
+  flex: 1; /* Occupies right side */
+  display: flex;
+  justify-content: flex-end; /* Align right */
+}
+
+.grid-dots {
+  display: grid;
+  grid-template-columns: repeat(10, 10px); /* 10 columns */
+  grid-template-rows: repeat(10, 10px); /* 10 rows */
+  gap: 8px; /* Space between dots */
+  margin-top: -30vh;
+}
+
+
+.grid-dots::before {
+  content: '';
+  display: block;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #4fbb1d 10%, transparent 10%) 0 0/20px 20px;
+}
 
   /* Small screens (mobile-first design) */
   @media (max-width: 576px) {
@@ -1570,20 +1616,37 @@ display: none;
 }
 
 
+  
 
 
-
-
-.container {
-  position: relative;
+section#portfolio .container {
   width: 100%;
-  max-width: 800px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  transform-style: preserve-3d;
-  perspective: 500px;
-  margin: auto;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; /* Responsive grid */
+  gap: 20px !important;
+  
+  /* Background image */
+  background-image: url('../imgs/image.png');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Don't repeat the image */
+  
+  /* Apply a blur effect */
+  position: relative; /* For positioning the overlay */
+}
+
+section#portfolio .container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* Create a semi-transparent overlay with a blur effect */
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity to make the image less clear */
+  filter: blur(8px); /* Apply the blur effect */
+  z-index: -1; /* Ensure the overlay is behind the content */
 }
 
 .container .box {
@@ -1716,5 +1779,191 @@ display: none;
   .container .box:hover {
     transform: none; /* Disable hover effect on smaller screens */
     box-shadow: none; /* Disable box shadow */
+  }
+}
+
+
+
+
+
+.about .container {
+  max-width: 800px;
+  margin: auto;
+  background: #282c34;
+  padding: 2rem;
+  color: #c9d1d9; /* Text color */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+
+  /* Clip-Path for Uneven Edges */
+  clip-path: polygon(
+    0% 5%, 5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%
+  );
+
+  border: 1px solid #444;
+}
+
+/* Torn effect using pseudo-elements */
+.about.container::before,
+.about.container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: url('data:image/svg+xml;utf8,\
+  <svg xmlns="http://www.w3.org/2000/svg" width=\'100%\' height=\'20\'>\
+      <path d=\'M0 15 Q30 5, 60 15 T120 15 T180 15 T240 15 T300 15 L300 20 L0 20 Z\' fill=\'#1e1e2e\'></path>\
+  </svg>') repeat-x;
+  background-size: 100px 20px;
+  z-index: -1;
+}
+
+.about.container::before {
+  top: -20px;
+}
+
+.about.container::after {
+  bottom: -20px;
+}
+
+/* Headings */
+.heading {
+  font-size: 2rem;
+  color: #569cd6; /* Light Blue */
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #ffd700; /* Yellow */
+}
+
+.comment {
+  color: #6a9955; /* Green */
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.sub-heading {
+  color:var(--text-black-100); /* Pinkish Purple */
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Code Block */
+.code {
+  padding-left: 2rem;
+  border-left: 2px solid #3e4451;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.property {
+  color: #9cdcfe; /* Light Blue */
+  margin-left: 1rem;
+}
+
+.name {
+  color: #dcdcaa; /* Light Yellow */
+}
+
+.string {
+  color: #ce9178; /* Orange/Red */
+}
+
+.number {
+  color: #b5cea8; /* Light Green */
+}
+
+.array-item {
+  color: #ce9178; /* Orange/Red */
+  margin-left: 1rem;
+}
+
+h2 {
+  color: var(--text-black-600); /* Pinkish Purple */
+  margin-left: 1rem;
+}
+
+/* Brackets */
+.code p {
+  color: #d4d4d4; /* Default text (Light Gray) */
+}
+
+/* Add pointer cursor to interactive elements */
+.about.container,
+.heading,
+.highlight,
+.sub-heading,
+.comment,
+.code {
+  cursor: pointer;
+}
+
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem; /* Reduce body padding */
+  }
+
+  .about.container {
+    max-width: 100%; /* Make the container fit the screen */
+    padding: 1rem; /* Reduce padding */
+    clip-path: none; /* Remove clip-path for simpler edges */
+    border: none;
+    box-shadow: none;
+  }
+
+  .heading {
+    font-size: 1.5rem; /* Smaller headings */
+  }
+
+  .sub-heading {
+    font-size: 1.2rem;
+  }
+
+  .code {
+    padding-left: 1rem;
+    border-left: 1px solid #3e4451;
+  }
+
+  .timeline-about {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2, .property, .name, .string, .number {
+    font-size: 0.9rem; /* Smaller fonts */
+  }
+
+  .comment {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem; /* Smaller body padding */
+  }
+
+  .heading {
+    font-size: 1.2rem;
+  }
+
+  .sub-heading {
+    font-size: 1rem;
+  }
+
+  .about .container {
+    padding: 0.5rem; /* Compact container */
+  }
+
+  .code {
+    padding-left: 0.5rem;
+    line-height: 1.4; /* Reduce spacing */
+  }
+
+  h2, .property, .name, .string, .number {
+    font-size: 0.8rem; /* Even smaller fonts */
   }
 }
